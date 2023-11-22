@@ -105,12 +105,21 @@ document.addEventListener('keydown', function(event){
         case 'Enter':
         case '=':
             if(display.innerText != ''){
-                display.innerText = eval(display.innerText);
-                geschiedenis += '=' + display.innerText + '\n';
-                geschiedenisarray.push(geschiedenis);
-                geschiedenis = '';
-                optellen++;
-                opnieuw = optellen;
+                try {
+                    const result = eval(display.innerText);
+                    if (isNaN(result) || !isFinite(result)) {
+                        throw new Error('Ongeldige invoer');
+                    }
+                    display.innerText = result;
+                    geschiedenis += '=' + result + '\n';
+                    geschiedenisarray.push(geschiedenis);
+                    geschiedenis = '';
+                    optellen++;
+                    opnieuw = optellen;
+                } catch (error) {
+                    display.innerText = 'Fout: Ongeldige invoer';
+                    setTimeout(() => (display.innerText = ''), 2000);
+                }
                 break;
             }
             else{
