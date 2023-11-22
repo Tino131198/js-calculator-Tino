@@ -21,29 +21,29 @@ let optellen = -1;
 let opnieuw;
 
 buttons.forEach((item) => {
-    item.onclick = () => {
-        if (item.id == 'clear') {
+    item.addEventListener('click', () => {
+        if (item.id === 'clear') {
             display.innerText = '';
             geschiedenis = '';
-        }else if(item.id == 'backspace') {
+        } else if (item.id === 'backspace') {
             let string = display.innerText.toString();
             display.innerText = string.substr(0, string.length - 1);
             geschiedenis = display.innerText;
-        }else if(display.innerText != '' && item.id =='equal'){
+        } else if (display.innerText !== '' && item.id === 'equal') {
             display.innerText = eval(display.innerText);
             geschiedenis += '=' + display.innerText + '\n';
             geschiedenisarray.push(geschiedenis);
             geschiedenis = '';
             optellen++;
             opnieuw = optellen;
-        }else if(display.innerText == '' && item.id == 'equal'){
+        } else if (display.innerText === '' && item.id === 'equal') {
             display.innerText = 'Vul wat in';
-            setTimeout(() => (display.innerText = ''), 2000)
-        }else{
+            setTimeout(() => (display.innerText = ''), 2000);
+        } else {
             display.innerText += item.id;
             geschiedenis += item.id;
         }
-    }
+    });
 })
 
 document.addEventListener('keydown', function(event){
