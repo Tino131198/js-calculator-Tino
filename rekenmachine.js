@@ -19,7 +19,6 @@ let geschiedenis = '';
 let geschiedenisarray = [];
 let optellen = -1;
 let opnieuw;
-
 buttons.forEach((item) => {
     item.addEventListener('click', () => {
         if (item.id === 'clear') {
@@ -30,12 +29,21 @@ buttons.forEach((item) => {
             display.innerText = string.substr(0, string.length - 1);
             geschiedenis = display.innerText;
         } else if (display.innerText !== '' && item.id === 'equal') {
-            display.innerText = eval(display.innerText);
-            geschiedenis += '=' + display.innerText + '\n';
-            geschiedenisarray.push(geschiedenis);
-            geschiedenis = '';
-            optellen++;
-            opnieuw = optellen;
+            try {
+                const result = eval(display.innerText);
+                if (isNaN(result) || !isFinite(result)) {
+                    throw new Error('Ongeldige invoer');
+                }
+                display.innerText = result;
+                geschiedenis += '=' + result + '\n';
+                geschiedenisarray.push(geschiedenis);
+                geschiedenis = '';
+                optellen++;
+                opnieuw = optellen;
+            } catch (error) {
+                display.innerText = 'Fout: Ongeldige invoer';
+                setTimeout(() => (display.innerText = ''), 2000);
+            }
         } else if (display.innerText === '' && item.id === 'equal') {
             display.innerText = 'Vul wat in';
             setTimeout(() => (display.innerText = ''), 2000);
@@ -44,7 +52,8 @@ buttons.forEach((item) => {
             geschiedenis += item.id;
         }
     });
-})
+});
+
 
 document.addEventListener('keydown', function(event){
     switch(event.key){
