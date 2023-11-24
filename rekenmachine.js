@@ -45,6 +45,7 @@ buttons.forEach((item) => {
             } catch (error) {
                 display.innerText = 'Fout: Ongeldige invoer';
                 geschiedenis = '';
+                optellen = opnieuw;
                 setTimeout(() => (display.innerText = ''), 2000);
             }
         } else if (display.innerText === '' && item.id === 'equal') {
@@ -123,6 +124,7 @@ document.addEventListener('keydown', function(event){
                 } catch (error) {
                     display.innerText = 'Fout: Ongeldige invoer';
                     geschiedenis = '';
+                    optellen = opnieuw;
                     setTimeout(() => (display.innerText = ''), 2000);
                 }
                 break;
