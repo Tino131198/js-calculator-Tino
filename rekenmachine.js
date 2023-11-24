@@ -24,10 +24,12 @@ buttons.forEach((item) => {
         if (item.id === 'clear') {
             display.innerText = '';
             geschiedenis = '';
+            optellen = opnieuw;
         } else if (item.id === 'backspace') {
             let string = display.innerText.toString();
             display.innerText = string.substr(0, string.length - 1);
             geschiedenis = display.innerText;
+            optellen = opnieuw;
         } else if (display.innerText !== '' && item.id === 'equal') {
             try {
                 const result = eval(display.innerText);
@@ -102,6 +104,7 @@ document.addEventListener('keydown', function(event){
             let string = display.innerText.toString();
             display.innerText = string.substr(0, string.length - 1);
             geschiedenis = display.innerText;
+            optellen = opnieuw;
             break;
         case 'Enter':
         case '=':
@@ -134,6 +137,7 @@ document.addEventListener('keydown', function(event){
         case 'C':
              display.innerText = '';
              geschiedenis = '';
+             optellen = opnieuw;
              break;
         case '-':
              display.innerText += '-';
